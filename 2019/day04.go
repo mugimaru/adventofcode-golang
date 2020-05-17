@@ -8,6 +8,8 @@ import (
 	"github.com/mugimaru73/adventofcode-golang/utils"
 )
 
+var concurrency = 4
+
 func run(input string) (interface{}, interface{}) {
 	pwdRange := []int{0, 0}
 
@@ -20,10 +22,25 @@ func run(input string) (interface{}, interface{}) {
 
 	}
 
-	return countValidPassword(pwdRange[0], pwdRange[1], isPwdValid), countValidPassword(pwdRange[0], pwdRange[1], isPwdValidV2)
+	return countValidPasswords(pwdRange[0], pwdRange[1], isPwdValid), countValidPasswords(pwdRange[0], pwdRange[1], isPwdValidV2)
 }
 
-func countValidPassword(from int, to int, validator func(int) bool) int {
+func countValidPasswords(from int, to int, validator func(int) bool) int {
+	count := 0
+	countersChan := make(chan int, concurrency)
+
+	for _, r := range utils.SplitIntRange(from, to, concurrency) {
+		go doCountValidPasswords(r[0], r[1], validator, countersChan)
+	}
+
+	for a := 0; a < concurrency; a++ {
+		count += <-countersChan
+	}
+
+	return count
+}
+
+func doCountValidPasswords(from int, to int, validator func(int) bool, res chan<- int) {
 	var validPasswords []int
 
 	for pwd := from; pwd <= to; pwd++ {
@@ -32,7 +49,7 @@ func countValidPassword(from int, to int, validator func(int) bool) int {
 		}
 	}
 
-	return len(validPasswords)
+	res <- len(validPasswords)
 }
 
 func isPwdValid(pwd int) bool {

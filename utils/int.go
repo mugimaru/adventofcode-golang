@@ -18,3 +18,26 @@ func SliceInt(v int) []int8 {
 
 	return slice
 }
+
+// SplitIntRange splits range into n sequential ranges
+func SplitIntRange(from int, to int, n int) [][]int {
+	step := (to - from) / n
+	groups := make([][]int, n)
+
+	nextGroupStartsFrom := from
+	for i := 0; i < n; i++ {
+
+		groupEndsAt := nextGroupStartsFrom + step
+		if i == n-1 {
+			if to < groupEndsAt {
+				groupEndsAt = to
+			}
+		}
+
+		groups[i] = []int{nextGroupStartsFrom, groupEndsAt}
+
+		nextGroupStartsFrom = groupEndsAt + 1
+	}
+
+	return groups
+}
