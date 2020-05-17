@@ -1,15 +1,18 @@
-# Advent of Code [2019](https://adventofcode.com/2019)
-
+# [Advent of Code](https://adventofcode.com/): [Go](https://golang.org/)
 
 ## Usage
 
-Solve default puzzle input
+Solve first puzzle of year 2019
 ```
-go run 2019/day01.go
-```
-
-Solve custom puzzle input
-```
-go run 2019/day01.go /path/to/custom/input.txt
+./run 2020 1
 ```
 
+Solve second puzzle of year 2019
+```
+./run 02
+```
+
+Solve third puzzle of year 2019 with custom input
+```
+./run 2019 3 /path/to/custom/input.txt
+```
