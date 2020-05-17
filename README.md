@@ -1,6 +1,6 @@
 # [Advent of Code](https://adventofcode.com/): [Go](https://golang.org/)
 
-## Usage
+## Usage (bash script)
 
 Solve first puzzle of year 2019
 ```

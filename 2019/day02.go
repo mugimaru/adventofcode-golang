@@ -9,9 +9,9 @@ import (
 
 var p2DesiredOutput = 19690720
 
-func run(input string) (interface{}, interface{}, interface{}) {
+func run(input string) (interface{}, interface{}) {
 	program := readProgram(input)
-	return calculateOutput(12, 10, program), solveP2(program), nil
+	return calculateOutput(12, 10, program), solveP2(program)
 }
 
 func solveP2(program []int) int {

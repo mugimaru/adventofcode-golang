@@ -13,11 +13,8 @@ import (
 	"github.com/mugimaru73/adventofcode/executor"
 )
 
-func run(input string) (interface{}, interface{}, interface{}) {
-	var Part1 = 0
-	var Part2 = 0
-
-	return Part1, Part2, nil
+func run(input string) (interface{}, interface{}) {
+	return "Part1wip", "Part2wip"
 }
 
 func main() {

@@ -8,7 +8,7 @@ import (
 	"github.com/mugimaru73/adventofcode/executor"
 )
 
-func run(input string) (interface{}, interface{}, interface{}) {
+func run(input string) (interface{}, interface{}) {
 	var Part1 = 0.0
 	var Part2 = 0.0
 
@@ -23,7 +23,7 @@ func run(input string) (interface{}, interface{}, interface{}) {
 		Part2 += part2FuelRequired(fuelReq, fuelReq)
 	}
 
-	return int(Part1), int(Part2), nil
+	return int(Part1), int(Part2)
 }
 
 func fuelRequired(distance float64) float64 {

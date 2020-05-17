@@ -17,7 +17,7 @@ type point struct {
 	y int
 }
 
-func run(input string) (interface{}, interface{}, interface{}) {
+func run(input string) (interface{}, interface{}) {
 	firstPath, secondPath := parseInput(input)
 
 	var m = make(map[point]int)
@@ -38,7 +38,7 @@ func run(input string) (interface{}, interface{}, interface{}) {
 		}
 	}
 
-	return minDistance, minSteps, nil
+	return minDistance, minSteps
 }
 
 func calculateDistance(p point) int {
