@@ -31,9 +31,6 @@ func main() {
 	var srcFile = basePath + ".go"
 	var inputFile = basePath + ".input.txt"
 
-	path, err := filepath.Abs(srcFile)
-	handleError(err)
-
 	if checkFileExists(srcFile) || checkFileExists(inputFile) {
 		panic("file exists")
 	}
