@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mugimaru73/adventofcode/executor"
+	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
 type step struct {

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mugimaru73/adventofcode/executor"
+	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
 func run(input string) (interface{}, interface{}) {

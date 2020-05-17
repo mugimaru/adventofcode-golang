@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mugimaru73/adventofcode/executor"
+	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
 var p2DesiredOutput = 19690720
