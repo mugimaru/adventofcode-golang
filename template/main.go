@@ -34,8 +34,6 @@ func main() {
 	path, err := filepath.Abs(srcFile)
 	handleError(err)
 
-	fmt.Printf("src=%v\ninput=%v\nabs=%v\n", srcFile, inputFile, path)
-
 	if checkFileExists(srcFile) || checkFileExists(inputFile) {
 		panic("file exists")
 	}
