@@ -11,18 +11,29 @@ func main() {
 
 func run(input string) (interface{}, interface{}) {
 	program := intcode.LoadProgram(input)
+	outCh1 := doRunProgram(program, []int{1})
+	outCh2 := doRunProgram(program, []int{5})
 
+	return readOutput(outCh1), readOutput(outCh2)
+}
+
+func doRunProgram(p []int, input []int) chan int {
+	program := intcode.CopyProgram(p)
 	chIn := make(chan int)
 	chOut := make(chan int, 100)
 
-	out := []int{}
-
 	go intcode.Run(&program, chIn, chOut)
-	chIn <- 1
+	for _, v := range input {
+		chIn <- v
+	}
 
+	return chOut
+}
+
+func readOutput(chOut chan int) []int {
+	out := []int{}
 	for v := range chOut {
 		out = append(out, v)
 	}
-
-	return out, nil
+	return out
 }

@@ -28,6 +28,27 @@ type Op struct {
 	Mode3  Mode
 }
 
+func (op Op) LoadP1(ip int, mem *Memory) int {
+	return loadParam(mem, ip+1, op.Mode1)
+}
+
+func (op Op) LoadP2(ip int, mem *Memory) int {
+	return loadParam(mem, ip+2, op.Mode2)
+}
+
+func loadParam(mem *Memory, ip int, mode Mode) int {
+	value := mem.Get(ip)
+
+	switch mode {
+	case ModePosition:
+		return mem.Get(value)
+	case ModeImmediate:
+		return value
+	default:
+		panic("Unknown mode")
+	}
+}
+
 func loadOp(v int) Op {
 	mode3 := v / 10000
 	mode2 := v % 10000 / 1000
@@ -43,8 +64,8 @@ func Run(mem *Memory, chIn, chOut chan int) {
 		op := loadOp(mem.Get(ip))
 		switch op.Opcode {
 		case 1, 2:
-			p1 := loadParam(mem, ip+1, op.Mode1)
-			p2 := loadParam(mem, ip+2, op.Mode2)
+			p1 := op.LoadP1(ip, mem)
+			p2 := op.LoadP2(ip, mem)
 			target := mem.Get(ip + 3)
 
 			if op.Opcode == 1 {
@@ -59,27 +80,33 @@ func Run(mem *Memory, chIn, chOut chan int) {
 			mem.Set(addr, input)
 			ip += 2
 		case 4:
-			chOut <- loadParam(mem, ip+1, op.Mode1)
+			chOut <- op.LoadP1(ip, mem)
 			ip += 2
+		case 5, 6:
+			p1 := op.LoadP1(ip, mem)
+
+			if (op.Opcode == 5 && p1 != 0) || (op.Opcode == 6 && p1 == 0) {
+				ip = op.LoadP2(ip, mem)
+			} else {
+				ip += 3
+			}
+		case 7, 8:
+			p1 := op.LoadP1(ip, mem)
+			p2 := op.LoadP2(ip, mem)
+			p3 := mem.Get(ip + 3)
+
+			if (op.Opcode == 7 && p1 < p2) || (op.Opcode == 8 && p1 == p2) {
+				mem.Set(p3, 1)
+			} else {
+				mem.Set(p3, 0)
+			}
+			ip += 4
 		case 99:
 			close(chOut)
 			return
 		default:
 			panic(fmt.Sprint("invalid opcode ", op.Opcode))
 		}
-	}
-}
-
-func loadParam(mem *Memory, ip int, mode Mode) int {
-	value := mem.Get(ip)
-
-	switch mode {
-	case ModePosition:
-		return mem.Get(value)
-	case ModeImmediate:
-		return value
-	default:
-		panic("Unknown mode")
 	}
 }
 
