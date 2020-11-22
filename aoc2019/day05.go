@@ -20,8 +20,11 @@ func doRunProgram(p []int, input []int) chan int {
 	program := intcode.CopyProgram(p)
 	chIn := make(chan int)
 	chOut := make(chan int, 100)
+	chDone := make(chan int)
 
-	go intcode.Run(&program, chIn, chOut)
+	go intcode.Run(&program, chIn, chOut, chDone)
+
+	<-chDone
 	for _, v := range input {
 		chIn <- v
 	}

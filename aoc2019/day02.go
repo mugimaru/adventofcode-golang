@@ -31,7 +31,7 @@ func calculateOutput(noun int, verb int, program intcode.Memory) int {
 	mem := intcode.CopyProgram(program)
 	mem.Set(1, noun)
 	mem.Set(2, verb)
-	intcode.Run(&mem, nil, nil)
+	intcode.Run(&mem, nil, nil, nil)
 
 	return mem.Get(0)
 }

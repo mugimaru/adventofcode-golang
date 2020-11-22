@@ -57,7 +57,7 @@ func loadOp(v int) Op {
 	return Op{op, Mode(mode1), Mode(mode2), Mode(mode3)}
 }
 
-func Run(mem *Memory, chIn, chOut chan int) {
+func Run(mem *Memory, chIn chan int, chOut chan int, chDone chan int) {
 	var ip int = 0
 
 	for {
@@ -102,8 +102,8 @@ func Run(mem *Memory, chIn, chOut chan int) {
 			}
 			ip += 4
 		case 99:
-			if chOut != nil {
-				close(chOut)
+			if chDone != nil {
+				chDone <- 1
 			}
 			return
 		default:
