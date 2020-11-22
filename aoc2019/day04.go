@@ -1,16 +1,19 @@
-package main
+package aoc2019
 
 import (
 	"strconv"
 	"strings"
 
-	"github.com/mugimaru73/adventofcode-golang/executor"
 	"github.com/mugimaru73/adventofcode-golang/utils"
 )
 
 var concurrency = 4
 
-func run(input string) (interface{}, interface{}) {
+func init() {
+	registerFun("04", SolveDay04)
+}
+
+func SolveDay04(input string) (interface{}, interface{}) {
 	pwdRange := []int{0, 0}
 
 	for i, v := range strings.Split(input, "-") {
@@ -96,8 +99,4 @@ func isPwdValidV2(pwd int) bool {
 	}
 
 	return hasDoubleDigit
-}
-
-func main() {
-	executor.Run(executor.ReadInput("2019/day04.input.txt"), run)
 }

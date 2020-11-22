@@ -1,14 +1,16 @@
-package main
+package aoc2019
 
 import (
 	"fmt"
 	"math"
 	"strings"
-
-	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
-func run(input string) (interface{}, interface{}) {
+func init() {
+	registerFun("06", SolveDay06)
+}
+
+func SolveDay06(input string) (interface{}, interface{}) {
 	orbits := make(map[string][]string)
 
 	for _, v := range strings.Split(input, "\n") {
@@ -104,8 +106,4 @@ func shortestPath(from string, to string, orbits map[string][]string, acc int) i
 	}
 
 	return minPath
-}
-
-func main() {
-	executor.Run(executor.ReadInput("2019/day06.input.txt"), run)
 }

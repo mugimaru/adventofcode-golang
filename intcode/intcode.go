@@ -102,7 +102,9 @@ func Run(mem *Memory, chIn, chOut chan int) {
 			}
 			ip += 4
 		case 99:
-			close(chOut)
+			if chOut != nil {
+				close(chOut)
+			}
 			return
 		default:
 			panic(fmt.Sprint("invalid opcode ", op.Opcode))

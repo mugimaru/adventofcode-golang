@@ -1,15 +1,14 @@
-package main
+package aoc2019
 
 import (
-	"github.com/mugimaru73/adventofcode-golang/executor"
 	"github.com/mugimaru73/adventofcode-golang/intcode"
 )
 
-func main() {
-	executor.Run(executor.ReadInput("2019/day05.input.txt"), run)
+func init() {
+	registerFun("05", SolveDay05)
 }
 
-func run(input string) (interface{}, interface{}) {
+func SolveDay05(input string) (interface{}, interface{}) {
 	program := intcode.LoadProgram(input)
 	outCh1 := doRunProgram(program, []int{1})
 	outCh2 := doRunProgram(program, []int{5})

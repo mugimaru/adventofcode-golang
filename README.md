@@ -1,18 +1,27 @@
 # [Advent of Code](https://adventofcode.com/): [Go](https://golang.org/)
 
-## Usage (bash script)
+## Build
+
+```sh
+make
+```
+
+## Run
 
 Solve first puzzle of year 2019
-```
-./run 2020 1
+
+```sh
+./aoc
 ```
 
-Solve second puzzle of year 2019
-```
-./run 02
+Solve second puzzle of year 2020
+
+```sh
+./aoc -year 2020 -day 2
 ```
 
-Solve third puzzle of year 2019 with custom input
-```
-./run 2019 3 /path/to/custom/input.txt
+Custom input
+
+```sh
+./aoc -year 2019 -day 3 -path /path/to/custom/input.txt
 ```

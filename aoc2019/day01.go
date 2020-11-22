@@ -1,14 +1,16 @@
-package main
+package aoc2019
 
 import (
 	"math"
 	"strconv"
 	"strings"
-
-	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
-func run(input string) (interface{}, interface{}) {
+func init() {
+	registerFun("01", SolveDay01)
+}
+
+func SolveDay01(input string) (interface{}, interface{}) {
 	var Part1 = 0.0
 	var Part2 = 0.0
 
@@ -41,8 +43,4 @@ func part2FuelRequired(acc float64, distance float64) float64 {
 	}
 
 	return acc
-}
-
-func main() {
-	executor.Run(executor.ReadInput("2019/day01.input.txt"), run)
 }

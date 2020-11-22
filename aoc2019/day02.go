@@ -1,13 +1,16 @@
-package main
+package aoc2019
 
 import (
-	"github.com/mugimaru73/adventofcode-golang/executor"
 	"github.com/mugimaru73/adventofcode-golang/intcode"
 )
 
 const p2DesiredOutput = 19690720
 
-func run(input string) (interface{}, interface{}) {
+func init() {
+	registerFun("02", SolveDay02)
+}
+
+func SolveDay02(input string) (interface{}, interface{}) {
 	program := intcode.LoadProgram(input)
 	return calculateOutput(12, 2, program), solveP2(program)
 }
@@ -31,8 +34,4 @@ func calculateOutput(noun int, verb int, program intcode.Memory) int {
 	intcode.Run(&mem, nil, nil)
 
 	return mem.Get(0)
-}
-
-func main() {
-	executor.Run(executor.ReadInput("2019/day02.input.txt"), run)
 }

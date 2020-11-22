@@ -1,10 +1,8 @@
-package main
+package aoc2019
 
 import (
 	"strconv"
 	"strings"
-
-	"github.com/mugimaru73/adventofcode-golang/executor"
 )
 
 type step struct {
@@ -17,7 +15,11 @@ type point struct {
 	y int
 }
 
-func run(input string) (interface{}, interface{}) {
+func init() {
+	registerFun("03", SolveDay03)
+}
+
+func SolveDay03(input string) (interface{}, interface{}) {
 	firstPath, secondPath := parseInput(input)
 
 	var m = make(map[point]int)
@@ -110,8 +112,4 @@ func parsePath(pathStr string) []step {
 	}
 
 	return parsed
-}
-
-func main() {
-	executor.Run(executor.ReadInput("2019/day03.input.txt"), run)
 }
