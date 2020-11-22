@@ -15,7 +15,7 @@ func SolveDay02(input string) (interface{}, interface{}) {
 	return calculateOutput(12, 2, program), solveP2(program)
 }
 
-func solveP2(program []int) int {
+func solveP2(program intcode.Memory) int {
 	for noun := 0; noun < 100; noun++ {
 		for verb := 0; verb < 100; verb++ {
 			if calculateOutput(noun, verb, program) == p2DesiredOutput {
@@ -29,9 +29,9 @@ func solveP2(program []int) int {
 
 func calculateOutput(noun int, verb int, program intcode.Memory) int {
 	mem := intcode.CopyProgram(program)
-	mem.Set(1, noun)
-	mem.Set(2, verb)
+	mem.Set(1, intcode.Value(noun))
+	mem.Set(2, intcode.Value(verb))
 	intcode.Run(&mem, nil, nil, nil)
 
-	return mem.Get(0)
+	return int(mem.Get(0))
 }

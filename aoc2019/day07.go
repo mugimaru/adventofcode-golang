@@ -16,7 +16,7 @@ func SolveDay07(input string) (interface{}, interface{}) {
 	return maxThrust(p, []int{0, 1, 2, 3, 4}, testSettings), maxThrust(p, []int{5, 6, 7, 8, 9}, testSettingsFeedbackLoop)
 }
 
-func maxThrust(program []int, settingsTemplate []int, fun func([5]int, []int) int) int {
+func maxThrust(program intcode.Memory, settingsTemplate []int, fun func([5]int, intcode.Memory) int) int {
 	max := 0
 	for _, settings := range utils.Permutations(settingsTemplate) {
 		var arr [5]int
@@ -31,28 +31,28 @@ func maxThrust(program []int, settingsTemplate []int, fun func([5]int, []int) in
 	return max
 }
 
-func testSettings(settings [5]int, program []int) int {
+func testSettings(settings [5]int, program intcode.Memory) int {
 	out := 0
 
 	for i := 0; i < 5; i++ {
 		p := intcode.CopyProgram(program)
-		chIn := make(chan int)
-		chOut := make(chan int)
+		chIn := make(chan int64)
+		chOut := make(chan int64)
 		go intcode.Run(&p, chIn, chOut, nil)
-		chIn <- settings[i]
-		chIn <- out
+		chIn <- int64(settings[i])
+		chIn <- int64(out)
 
-		out = <-chOut
+		out = int(<-chOut)
 	}
 
 	return out
 }
 
-func testSettingsFeedbackLoop(settings [5]int, program []int) int {
-	ch := make([](chan int), n)
+func testSettingsFeedbackLoop(settings [5]int, program intcode.Memory) int {
+	ch := make([](chan int64), n)
 	for i := 0; i < n; i++ {
-		ch[i] = make(chan int, 100)
-		ch[i] <- settings[i]
+		ch[i] = make(chan int64, 100)
+		ch[i] <- int64(settings[i])
 	}
 	chDone := make(chan int)
 
@@ -69,5 +69,5 @@ func testSettingsFeedbackLoop(settings [5]int, program []int) int {
 	}
 
 	<-chDone
-	return <-ch[n-1]
+	return int(<-ch[n-1])
 }
