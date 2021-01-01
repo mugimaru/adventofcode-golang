@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 
 	"github.com/mugimaru73/adventofcode-golang/aoc2019"
+	"github.com/mugimaru73/adventofcode-golang/aoc2020"
 )
 
 var year string
@@ -15,7 +16,7 @@ var inputFilePath string
 func init() {
 	var dayInt int
 	flag.IntVar(&dayInt, "day", 1, "day")
-	flag.StringVar(&year, "year", "2019", "year")
+	flag.StringVar(&year, "year", "2020", "year")
 	flag.StringVar(&inputFilePath, "input", "", "path to input file")
 
 	flag.Parse()
@@ -26,6 +27,11 @@ func main() {
 	switch year {
 	case "2019":
 		error := aoc2019.Run(day, readInput())
+		if error != nil {
+			panic(error)
+		}
+	case "2020":
+		error := aoc2020.Run(day, readInput())
 		if error != nil {
 			panic(error)
 		}
