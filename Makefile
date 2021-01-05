@@ -6,4 +6,4 @@ build:
 
 .PHONY: test
 test:
-	go test -race -v ./aoc2020 ./aoc2019 ./cli ./utils ./intcode
+	go test -race -v ./aoc2015 ./aoc2020 ./aoc2019 ./cli ./utils ./intcode
