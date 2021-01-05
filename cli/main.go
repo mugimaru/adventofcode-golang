@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"github.com/mugimaru73/adventofcode-golang/aoc2015"
 	"github.com/mugimaru73/adventofcode-golang/aoc2019"
 	"github.com/mugimaru73/adventofcode-golang/aoc2020"
 )
@@ -25,6 +26,10 @@ func init() {
 
 func main() {
 	switch year {
+	case "2015":
+		if error := aoc2015.Run(day, readInput()); error != nil {
+			panic(error)
+		}
 	case "2019":
 		error := aoc2019.Run(day, readInput())
 		if error != nil {
