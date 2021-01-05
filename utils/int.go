@@ -41,3 +41,14 @@ func SplitIntRange(from int, to int, n int) [][]int {
 
 	return groups
 }
+
+func MinInt(ints ...int) int {
+	min := ints[0]
+	for i := 1; i < len(ints); i++ {
+		if ints[i] < min {
+			min = ints[i]
+		}
+	}
+
+	return min
+}
