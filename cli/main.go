@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/mugimaru73/adventofcode-golang/aoc2023"
 	"io/ioutil"
 
 	"github.com/mugimaru73/adventofcode-golang/aoc2015"
@@ -37,6 +38,11 @@ func main() {
 		}
 	case "2020":
 		error := aoc2020.Run(day, readInput())
+		if error != nil {
+			panic(error)
+		}
+	case "2023":
+		error := aoc2023.Run(day, readInput())
 		if error != nil {
 			panic(error)
 		}
