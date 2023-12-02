@@ -1,7 +1,6 @@
 package aoc2023
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -23,6 +22,10 @@ func (cs *cubesSet) Add(cs2 *cubesSet) {
 	cs.B += cs2.B
 }
 
+func (cs *cubesSet) Power() int {
+	return cs.R * cs.G * cs.B
+}
+
 type round struct {
 	id   int
 	sets []*cubesSet
@@ -33,12 +36,11 @@ var bag *cubesSet = &cubesSet{R: 12, G: 13, B: 14}
 func SolveDay02(input string) (interface{}, interface{}) {
 	rounds := parseDay02Input(input)
 
-	return solveDay02Part1(rounds), 0
+	return solveDay02Part1(rounds), solveDay02Part2(rounds)
 }
 
 func solveDay02Part1(rounds []*round) int {
 	var sum int
-	fmt.Println(bag)
 	for i := 0; i < len(rounds); i++ {
 		isGameValid := true
 		for _, s := range rounds[i].sets {
@@ -54,6 +56,28 @@ func solveDay02Part1(rounds []*round) int {
 	}
 
 	return sum
+}
+
+func solveDay02Part2(rounds []*round) int {
+	var totalPower int
+	for i := 0; i < len(rounds); i++ {
+		fnc := &cubesSet{}
+		for _, s := range rounds[i].sets {
+			if s.R > fnc.R {
+				fnc.R = s.R
+			}
+			if s.G > fnc.G {
+				fnc.G = s.G
+			}
+			if s.B > fnc.B {
+				fnc.B = s.B
+			}
+		}
+
+		totalPower += fnc.Power()
+	}
+
+	return totalPower
 }
 
 func parseDay02Input(input string) []*round {
