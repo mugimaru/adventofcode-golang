@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/mugimaru73/adventofcode-golang/aoc2023"
+	"github.com/mugimaru73/adventofcode-golang/aoc2024"
 	"io/ioutil"
 
 	"github.com/mugimaru73/adventofcode-golang/aoc2015"
@@ -28,23 +29,28 @@ func init() {
 func main() {
 	switch year {
 	case "2015":
-		if error := aoc2015.Run(day, readInput()); error != nil {
-			panic(error)
+		if err := aoc2015.Run(day, readInput()); err != nil {
+			panic(err)
 		}
 	case "2019":
-		error := aoc2019.Run(day, readInput())
-		if error != nil {
-			panic(error)
+		err := aoc2019.Run(day, readInput())
+		if err != nil {
+			panic(err)
 		}
 	case "2020":
-		error := aoc2020.Run(day, readInput())
-		if error != nil {
-			panic(error)
+		err := aoc2020.Run(day, readInput())
+		if err != nil {
+			panic(err)
 		}
 	case "2023":
-		error := aoc2023.Run(day, readInput())
-		if error != nil {
-			panic(error)
+		err := aoc2023.Run(day, readInput())
+		if err != nil {
+			panic(err)
+		}
+	case "2024":
+		err := aoc2024.Run(day, readInput())
+		if err != nil {
+			panic(err)
 		}
 	default:
 		panic("not implemented")
