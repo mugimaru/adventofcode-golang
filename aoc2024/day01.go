@@ -12,7 +12,7 @@ func init() {
 }
 
 func SolveDay01(input string) (interface{}, interface{}) {
-	a, b := parseInput(input)
+	a, b := parseInputDay01(input)
 
 	slices.Sort(a)
 	slices.Sort(b)
@@ -40,7 +40,7 @@ func SolveDay01(input string) (interface{}, interface{}) {
 	return diff, simScore
 }
 
-func parseInput(input string) ([]int, []int) {
+func parseInputDay01(input string) ([]int, []int) {
 	lines := strings.Split(input, "\n")
 	a := make([]int, len(lines))
 	b := make([]int, len(lines))
